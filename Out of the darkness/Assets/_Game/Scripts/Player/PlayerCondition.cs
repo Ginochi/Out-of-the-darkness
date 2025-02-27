@@ -6,9 +6,11 @@ public class PlayerCondition : MonoBehaviour
 
     private int _currentHealth;
     private bool _isDead;
+    private SpriteRenderer _spriteRenderer;
     
     void Start()
     {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         _currentHealth = maxHealth;
         _isDead = false;
     }
@@ -22,6 +24,8 @@ public class PlayerCondition : MonoBehaviour
         {
             _currentHealth = 0;
             _isDead = true;
+            _spriteRenderer.color = Color.red;
         }
     }
+
 }
