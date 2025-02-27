@@ -2,39 +2,40 @@ using UnityEngine;
 
 public class EnemyContoller : MonoBehaviour
 {
-    [SerializeField] private int movementSpeed;
+    [SerializeField] private float movementSpeed;
     [SerializeField] private int attackDamage;
+    [SerializeField] private GameObject player;
     
-    private GameObject _player;
     private Rigidbody2D _rb;
+    private Vector3 _playerPosition;
     
     void Start()
     {
-        _player = GameObject.FindGameObjectsWithTag("Player")[0];
         _rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
+        _playerPosition = player.transform.position;
         MoveToPlayer();
     }
-
-    private void OnTriggerEnter(Collider other)
+    
+    private void OnTriggerEnter2D(Collider2D other)
     {
         AttackPlayer(other);
     }
     
     private void MoveToPlayer()
     {
-        _rb.MovePosition(_player.transform.position * movementSpeed * Time.deltaTime);
+        _rb.MovePosition(_playerPosition * movementSpeed * Time.deltaTime);
     }
     
-    private void AttackPlayer(Collider collidingPlayer)
+    private void AttackPlayer(Collider2D collidingTarget)
     {
-        var player = collidingPlayer.GetComponent<PlayerCondition>();
-        if (player != null)
+        var collidingPlayer = collidingTarget.GetComponent<PlayerCondition>();
+        if (collidingPlayer != null)
         {
-            player.TakeDamage(attackDamage);
+            collidingPlayer.TakeDamage(attackDamage);
         }
     }
 }

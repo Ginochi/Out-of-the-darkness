@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        isMoving = false;
         rb = GetComponent<Rigidbody2D>();
         targetPosition = rb.position;
     }
