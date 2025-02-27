@@ -9,6 +9,7 @@ public class PlayerCondition : MonoBehaviour
     
     void Start()
     {
+        _currentHealth = maxHealth;
         _isDead = false;
     }
     
